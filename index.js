@@ -1,6 +1,6 @@
 'use strict';
 
-/* 不得姐笑话采集工具 */
+/* 冷笑话采集工具 */
 
 var request = require('requrl');
 var assert = require('assert');
@@ -30,18 +30,18 @@ module.exports = function(pagefrom, pageto, cb){
 	for(var i = from; i <= to; i++){
 		var page = i;
 		request({
-			url: 'http://www.budejie.com/text/' + i,
+			url: 'http://lengxiaohua.com/new?page_num=' + i,
 			headers: {
-				"referer": 'http:///www.budejie.com/',
+				"referer": 'http:///lengxiaohua.com/',
 				"user-agent": 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.84'
 			},
 			success: function(data){
-				var matches = data.toString().replace(/\n|\r/gm, '').match(/<div class=\"j\-r\-list\-c\-desc\">.*?<\/div>/gm);
+				var matches = data.toString().replace(/\n|\r/gm, '').match(/<pre js\=\"joke_summary\">.*?<\/pre>/gm);
 				for(var j = 0 ; j < matches.length; j++){
-					var str = matches[j].match(/^\<div.*\>(.*?)\<\/div\>$/)[1].trim();
+					var str = matches[j].replace('<pre js=\"joke_summary\"><span class=\"first_char\">', '');
 					str = str.replace(/\s/g, '');
-					str = str.replace(/\&nbsp\;/g, ' ');
-					str = str.replace(/<br \/>/g, "\n");
+					str = str.replace('</span>', '');
+					str = str.replace('</pre>', '');
 					result.push(str);
 				}
 				finished++;

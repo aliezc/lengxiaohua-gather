@@ -1,6 +1,6 @@
 # pengfu-gather
 
-百思不得姐笑话采集脚本，采用node.js编写
+冷笑话采集脚本，采用node.js编写
 
 ## 依赖
 
@@ -17,9 +17,9 @@ npm install
 编写一个文件
 
 ```javascript
-var budejie = require('budejie-gather');
+var lengxiaohua = require('lengxiaohua-gather');
 
-budejie(1,			// 起始页码
+lengxiaohua(1,			// 起始页码
 		3,			// 结束页码
 function(res){		// 回调函数
 	for(var i = 0 ; i < res.length; i++){
